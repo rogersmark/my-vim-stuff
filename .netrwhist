@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/mark.rogers/projects/mark-new/projects/shcom/commerce/views'
+let g:netrw_dirhist_2='/Users/mark.rogers/projects/mark-new/projects/amp/tests'
+let g:netrw_dirhist_3='/Users/mark.rogers/projects/qa/projects/amp'
+let g:netrw_dirhist_4='/Users/mark.rogers/projects/mobile-redesign/projects/stx_mobile_webkit/views'
+let g:netrw_dirhist_5='/Users/mark.rogers/projects/mobile-redesign/etc/analyte'
+let g:netrw_dirhist_6='/Users/mark.rogers/projects/mark-new/etc/analyte'
+let g:netrw_dirhist_7='/Users/mark.rogers/projects/mark-new/shared/forms'
