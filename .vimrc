@@ -8,6 +8,7 @@ colorscheme wombat
 if has('gui_running')
   colorscheme no_quarter
 endif
+set transparency=10
 set clipboard=unnamed
 set guioptions+=LlRrb
 set guioptions-=LlRrb
@@ -44,10 +45,14 @@ map <leader>b :tabprevious<CR>
 map <leader>k :NERDTreeToggle<CR>
 " TagBar
 nmap <leader>1 :TagbarToggle<CR>
-autocmd VimEnter * nested TagbarOpen
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-autocmd FileType * nested :call tagbar#autoopen(0)
-autocmd BufEnter * nested :call tagbar#autoopen(0)
+" autocmd VimEnter * nested TagbarOpen
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+" autocmd FileType * nested :call tagbar#autoopen(0)
+" autocmd BufEnter * nested :call tagbar#autoopen(0)
+" Conque
+let g:ConqueTerm_TERM = 'xterm'
+map <leader>t :ConqueTermTab /bin/bash -l<CR>
+map <leader>s :ConqueTermSplit /bin/bash -l<CR>
 " ack keys
 nmap <leader>a <Esc>:Ack!
 " YankRing
