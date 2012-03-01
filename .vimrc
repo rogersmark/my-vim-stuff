@@ -45,13 +45,10 @@ map <leader>b :tabprevious<CR>
 map <leader>k :NERDTreeToggle<CR>
 " TagBar
 nmap <leader>1 :TagbarToggle<CR>
-" autocmd VimEnter * nested TagbarOpen
-" autocmd VimEnter * nested :call tagbar#autoopen(1)
-" autocmd FileType * nested :call tagbar#autoopen(0)
-" autocmd BufEnter * nested :call tagbar#autoopen(0)
 " Conque
 let g:ConqueTerm_TERM = 'xterm'
-map <leader>t :ConqueTermTab /bin/bash -l<CR>
+let g:ConqueTerm_ReadUnfocused = 1
+map <leader>d :ConqueTermTab /bin/bash -l<CR>
 map <leader>s :ConqueTermSplit /bin/bash -l<CR>
 " ack keys
 nmap <leader>a <Esc>:Ack!
@@ -59,29 +56,3 @@ nmap <leader>a <Esc>:Ack!
 nmap <leader>v :YRShow<CR>
 " PEP8
 let g:pep8_map='<leader>8'
-
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-command! -complete=shellcmd -nargs=+ RunTests call s:RunShellCommand('fab test:'.<q-args>)
-function! s:RunShellCommand(cmdline)
-  let isfirst = 1
-  let words = []
-  for word in split(a:cmdline, ':\zs')
-    if isfirst
-      let isfirst = 0  " don't change first word (shell command)
-    else
-      if word[0] =~ '\v[%#<]'
-        let word = expand(word)
-      endif
-      " let word = shellescape(word, 1)
-    endif
-    call add(words, word)
-  endfor
-  let expanded_cmdline = join(words, '')
-  botright new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  call setline(1, 'You entered:  ' . a:cmdline)
-  call setline(2, 'Expanded to:  ' . expanded_cmdline)
-  call append(line('$'), substitute(getline(2), '.', '=', 'g'))
-  silent execute '$read !'. expanded_cmdline
-  1
-endfunction

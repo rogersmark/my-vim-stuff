@@ -1,6 +1,113 @@
 Changelog
 =========
 
+## 2012-02-12 0.5.8
+-------------------
+* Fix pylint for Windows users
+* Python documentation search running from Vim (delete g:pydoc option)
+* Python code execution running from Vim (delete g:python option)
+
+## 2012-02-11 0.5.7
+-------------------
+* Fix 'g:pymode_lint_message' mode error
+* Fix breakpoints
+* Fix python paths and virtualenv detection
+
+## 2012-02-06 0.5.6
+-------------------
+* Fix 'g:pymode_syntax' option
+* Show error message in bottom part of screen
+  see 'g:pymode_lint_message'
+* Fix pylint for windows users
+* Fix breakpoint command (Use pdb when idpb not installed)
+
+## 2012-01-17 0.5.5
+-------------------
+* Add a sign for info messages from pylint.
+  (c) Fredrik Henrysson
+* Change motion keys: vic - viC, dam - daM and etc
+* Add 'g:pymode_lint_onfly' option
+
+## 2012-01-09 0.5.3
+-------------------
+* Prevent the configuration from breaking python-mode
+  (c) Dirk Wallenstein
+
+## 2012-01-08 0.5.2
+-------------------
+* Fix ropeomnicompletion
+* Add preview documentation
+
+## 2012-01-06 0.5.1
+-------------------
+* Happy new year!
+* Objects and motion  fixes
+
+## 2011-11-30 0.5.0
+-------------------
+* Add python objects and motions (beta)
+  :h pymode_motion
+
+## 2011-11-27 0.4.8
+-------------------
+* Add `PyLintWindowToggle` command
+* Fix some bugs
+
+## 2011-11-23 0.4.6
+-------------------
+* Enable all syntax highlighting
+  For old settings set in your vimrc:
+    let g:pymode_syntax_builtin_objs = 0
+    let g:pymode_syntax_builtin_funcs = 0
+
+* Change namespace of syntax variables
+  See README
+
+## 2011-11-18 0.4.5
+-------------------
+* Add 'g:pymode_syntax' option
+* Highlight 'self' keyword
+
+## 2011-11-16 0.4.4
+-------------------
+* Minor fixes
+
+## 2011-11-11 0.4.3
+-------------------
+* Fix pyflakes
+
+## 2011-11-09 0.4.2
+-------------------
+* Add FAQ
+* Some refactoring and fixes
+
+## 2011-11-08 0.4.0
+-------------------
+* Add alternative code checker "pyflakes"
+  See :h 'pymode_lint_checker'
+* Update install docs
+
+## 2011-10-30 0.3.3
+-------------------
+* Fix RopeShowDoc
+
+## 2011-10-28 0.3.2
+-------------------
+* Add 'g:pymode_options_*' stuff, for ability
+  to disable default pymode options for python buffers
+
+## 2011-10-27 0.3.1
+-------------------
+* Add 'g:pymode_rope_always_show_complete_menu' option
+* Some pylint fixes
+
+## 2011-10-25 0.3.0
+-------------------
+* Add g:pymode_lint_minheight and g:pymode_lint_maxheight
+  options
+* Fix PyLintToggle
+* Fix Rope and PyLint libs loading
+
 ## 2011-10-21 0.2.12
 --------------------
 * Auto open cwindow with results
