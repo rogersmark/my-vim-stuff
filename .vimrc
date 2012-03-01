@@ -38,21 +38,31 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+
 " Tabs
 map <leader>f :tabnext<CR>
 map <leader>b :tabprevious<CR>
+
 " NERDTree
 map <leader>k :NERDTreeToggle<CR>
+
 " TagBar
 nmap <leader>1 :TagbarToggle<CR>
+
 " Conque
 let g:ConqueTerm_TERM = 'xterm'
 let g:ConqueTerm_ReadUnfocused = 1
 map <leader>d :ConqueTermTab /bin/bash -l<CR>
 map <leader>s :ConqueTermSplit /bin/bash -l<CR>
+
 " ack keys
 nmap <leader>a <Esc>:Ack!
+
 " YankRing
 nmap <leader>v :YRShow<CR>
+
 " PEP8
 let g:pep8_map='<leader>8'
+
+" python-mode
+let g:pymode_breakpoint_key = '<leader>q'
