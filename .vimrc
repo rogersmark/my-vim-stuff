@@ -4,10 +4,8 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax enable
 " SETTINGS
-colorscheme wombat
-if has('gui_running')
-  colorscheme no_quarter
-endif
+colorscheme Monokai
+set t_Co=256
 set transparency=10
 set clipboard=unnamed
 set guioptions+=LlRrb
@@ -21,6 +19,7 @@ set shiftwidth=4
 set autoindent
 set foldmethod=indent
 set foldlevel=99
+set foldnestmax=2
 set number
 set ruler
 set completeopt=menuone,longest,preview
@@ -49,12 +48,6 @@ map <leader>k :NERDTreeToggle<CR>
 " TagBar
 nmap <leader>1 :TagbarToggle<CR>
 
-" Conque
-let g:ConqueTerm_TERM = 'xterm'
-let g:ConqueTerm_ReadUnfocused = 1
-map <leader>d :ConqueTermTab /bin/bash -l<CR>
-map <leader>s :ConqueTermSplit /bin/bash -l<CR>
-
 " ack keys
 nmap <leader>a <Esc>:Ack!
 
@@ -66,3 +59,4 @@ let g:pep8_map='<leader>8'
 
 " python-mode
 let g:pymode_breakpoint_key = '<leader>q'
+let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
