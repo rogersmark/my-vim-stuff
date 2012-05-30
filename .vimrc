@@ -4,7 +4,7 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax enable
 " SETTINGS
-colorscheme Monokai
+colorscheme smyck
 set t_Co=256
 set transparency=10
 set clipboard=unnamed
@@ -54,9 +54,9 @@ nmap <leader>a <Esc>:Ack!
 " YankRing
 nmap <leader>v :YRShow<CR>
 
-" PEP8
-let g:pep8_map='<leader>8'
-
 " python-mode
 let g:pymode_breakpoint_key = '<leader>q'
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
+
+" vim-pad
+let g:pad_dir = '/Users/mark.rogers/Documents/notes'
