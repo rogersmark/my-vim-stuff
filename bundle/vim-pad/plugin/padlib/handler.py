@@ -28,17 +28,17 @@ def open_pad(path=None, first_line=None): #{{{1
 		vim.command('let tmp = confirm("IMPORTANT:\n'\
 				'Please set g:pad_dir to a valid path in your vimrc.", "OK", 1, "Error")')
 		return
-	
+
 	# if no path is provided, we create one using the current time
 	if not path:
 		path = join(get_save_dir(), timestamp())
 
 	vim.command("silent! botright" + str(vim.eval("g:pad_window_height")) + "split " + path)
-	
+
 	# set the filetype to our default
 	if vim.eval('&filetype') in ('', 'conf'):
 		vim.command("set filetype=" + vim.eval("g:pad_default_format"))
-	
+
 	# map the local commands
 	if bool(int(vim.eval('has("gui_running")'))):
 		vim.command("noremap <silent> <buffer> <localleader><delete> :call pad#DeleteThis()<cr>")
@@ -46,7 +46,7 @@ def open_pad(path=None, first_line=None): #{{{1
 		vim.command("noremap <silent> <buffer> <localleader>dd :call pad#DeleteThis()<cr>")
 
 	vim.command("noremap <silent> <buffer> <localleader>+m :call pad#AddModeline()<cr>")
-	
+
 	# insert the text in first_line to the buffer, if provided
 	if first_line:
 		vim.current.buffer.append(first_line,0)
@@ -73,16 +73,16 @@ def get_filelist(query=None): # {{{1
 			else:
 				ack_path = "/usr/bin/vendor_perl/ack"
 			command = [ack_path, query, get_save_dir() + "/", "--type=text"]
-		
+
 		if bool(int(vim.eval("g:pad_search_ignorecase"))):
 			command.append("-i")
 		command.append("--max-count=1")
-		
-		files = [line.split(":")[0] 
+
+		files = [line.split(":")[0]
 				for line in Popen(command, stdout=PIPE, stderr=PIPE).communicate()[0].\
 							replace(get_save_dir() + "/", "").\
-							split("\n")	if line != '']	
-	
+							split("\n")	if line != '']
+
 	return files
 
 def fill_list(files, queried=False, custom_order=False): # {{{1
@@ -97,13 +97,13 @@ def fill_list(files, queried=False, custom_order=False): # {{{1
 	Keeps a cache so we only read the notes when the files have been modified.
 	"""
 	global cached_filenames, cached_timestamps, cached_data
-	
+
 	# we won't want to touch the cache
 	if custom_order:
 		queried = True
 
 	timestamps = [getmtime(join(get_save_dir(), f)) for f in files]
-	
+
 	# we will have a new list only on the following cases
 	if queried or files != cached_filenames or timestamps != cached_timestamps:
 		lines = []
@@ -117,7 +117,7 @@ def fill_list(files, queried=False, custom_order=False): # {{{1
 				else:
 					tail = u'\u21b2'.encode('utf-8').join((info.summary, info.body))
 				lines.append(pad + " @ " + tail)
-		
+
 		# we only update the cache if we are not queried, to preserve the global cache
 		if not queried:
 			cached_data = lines
@@ -129,7 +129,7 @@ def fill_list(files, queried=False, custom_order=False): # {{{1
 		id_string = matchobj.group("id")
 		mtime = str(int(getmtime(join(get_save_dir(), matchobj.group("id")))*1000000))
 		return id_string + " @ " + natural_timestamp(mtime).ljust(19) + " │"
-	
+
 	if not queried: # we use the cache
 		lines = [re.sub("(?P<id>^.*?) @", add_natural_timestamp, line) for line in cached_data]
 	else: # we use the new values in lines

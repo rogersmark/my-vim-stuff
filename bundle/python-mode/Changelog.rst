@@ -1,6 +1,50 @@
 Changelog
 =========
 
+## 2012-08-02 0.6.6
+-------------------
+* Updated Pep8 to version 1.3.3
+* Updated Pylint to version 0.25.2
+* Fixed virtualenv support for windows users
+* Added pymode modeline ':help PythonModeModeline'
+* Added diagnostic tool ':call pymode#troubleshooting#Test()'
+* Added `PyLintAuto` command ':help PyLintAuto' 
+* Code checking is async operation now
+* More, more fast the pymode folding
+* Repaired execution of python code
+
+## 2012-05-24 0.6.4
+-------------------
+* Add 'pymode_paths' option
+* Rope updated to version 0.9.4
+
+## 2012-04-18 0.6.3
+-------------------
+* Fix pydocs integration
+
+## 2012-04-10 0.6.2
+-------------------
+* Fix pymode_run for "unnamed" clipboard
+* Add 'pymode_lint_mccabe_complexity' option
+* Update Pep8 to version 1.0.1
+* Warning! Change 'pymode_rope_goto_def_newwin' option
+  for open "goto definition" in new window, set it to 'new' or 'vnew'
+  for horizontally or vertically split
+  If you use default behaviour (in the same buffer), not changes needed.
+
+## 2012-03-13 0.6.0
+-------------------
+* Add 'pymode_lint_hold' option 
+* Improve pymode loading speed
+* Add pep8, mccabe lint checkers
+* Now g:pymode_lint_checker can have many values
+  Ex. "pep8,pyflakes,mccabe"
+* Add 'pymode_lint_ignore' and 'pymode_lint_select' options 
+* Fix rope keys
+* Fix python motion in visual mode
+* Add folding 'pymode_folding'
+* Warning: 'pymode_lint_checker' now set to 'pyflakes,pep8,mccabe' by default
+
 ## 2012-02-12 0.5.8
 -------------------
 * Fix pylint for Windows users

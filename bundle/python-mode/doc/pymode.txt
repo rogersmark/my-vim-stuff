@@ -6,7 +6,7 @@
    (__)   (__)  (__) (_) (_)(_____)(_)\_)   (_/\/\_)(_____)(____/(____)     ~
 
 
-                          Version: 0.5.5
+                          Version: 0.6.6
 
 ==============================================================================
 CONTENTS                                                  *Python-mode-contents*
@@ -14,6 +14,7 @@ CONTENTS                                                  *Python-mode-contents*
     1.Intro...................................|PythonMode|
     2.Options.................................|PythonModeOptions|
         2.1.Customisation details.............|PythonModeOptionsDetails|
+        2.2.Modeline..........................|PythonModeModeline|
     3.Default Keys............................|PythonModeKeys|
     4.Commands................................|PythonModeCommands|
     5.FAQ.....................................|PythonModeFAQ|
@@ -26,7 +27,7 @@ CONTENTS                                                  *Python-mode-contents*
 
 Python-mode is a vim plugin that allows you to use the pylint, rope, pydoc
 library in vim to provide features like python code looking for bugs,
-refactoring and some other usefull things.
+refactoring and some other useful things.
 
 This plugin allow you create python code in vim very easily. There is no need
 to install the pylint or rope library on your system.
@@ -43,6 +44,8 @@ to install the pylint or rope library on your system.
 The script provides the following options that can customise the behaviour the
 PythonMode. These options should be set in your vimrc.
 
+|'pymode_paths'|                    Additional python paths for pymode
+
 |'pymode_doc'|                      Turns off the documentation script
 
 |'pymode_doc_key'|                  Key for show documentation
@@ -53,11 +56,15 @@ PythonMode. These options should be set in your vimrc.
 
 |'pymode_lint'|                     Turns off pylint script
 
-|'pymode_lint_checker'|             Switch code checkers (pylint, pyflakes)
+|'pymode_lint_checker'|             Switch code checkers (pylint, pyflakes, pep8, mccabe)
+
+|'pymode_lint_ignore'|              Skip errors and warnings
+
+|'pymode_lint_select'|              Select errors and warnings
 
 |'pymode_lint_onfly'|               Run linter on the fly
 
-|'pymode_lint_config'|              Filepath to pylinc configuration
+|'pymode_lint_config'|              Filepath to pylint configuration
 
 |'pymode_lint_write'|               Check code every save
 
@@ -69,11 +76,17 @@ PythonMode. These options should be set in your vimrc.
 
 |'pymode_lint_jump'|                Auto jump on first error
 
+|'pymode_lint_hold'|                Hold cursor in current window
+
 |'pymode_lint_minheight'|           Minimal height of pylint error window
+
+|'pymode_lint_mccabe_complexity'|   Maximum allowed mccabe complexity
 
 |'pymode_lint_maxheight'|           Maximal height of pylint error window
 
 |'pymode_rope'|                     Turns off rope script
+
+|'pymode_folding'|                  Turns on/off python folding
 
 |'pymode_breakpoint'|               Turns off breakpoint script
 
@@ -90,9 +103,6 @@ PythonMode. These options should be set in your vimrc.
 |'pymode_options_indent'|           Set default pymode options for
                                   python indentation
 
-|'pymode_options_fold'|             Set default pymode options for
-                                  python folding
-
 |'pymode_options_other'|            Set default pymode options for
                                   python codding
 
@@ -108,6 +118,39 @@ PythonMode. These options should be set in your vimrc.
 
 To enable any of the below options you should put the given line in your
 '$HOME/.vimrc'. See |vimrc-intro|.
+
+------------------------------------------------------------------------------
+2.2. Modeline ~
+                                                      *PythonModeModeline*
+
+Feature like VIM modeline `:help modeline`. Allow changing pymode options for
+edited file. Pymode modeline should always be the last line in the file and
+look like:
+
+>
+    # pymode:lint_ignore=E0202:doc=0:lint_write=0
+<
+
+Examples:
+
+Disable folding on current file:
+>
+    # pymode:folding=0
+<
+
+Set linters and mccabe complexity.
+>
+    # pymode:lint_checker=pip,mccabe:lint_mccabe_complexity=10
+<
+
+This changes will work only in current buffer.
+
+------------------------------------------------------------------------------
+                                                                *'pymode_paths'*
+Values: List of strings
+Default: [].
+
+This option set additional python import paths
 
 ------------------------------------------------------------------------------
                                                                   *'pymode_doc'*
@@ -144,10 +187,32 @@ If this option is set to 0 then pylint script is disabled.
 
 ------------------------------------------------------------------------------
                                                          *'pymode_lint_checker'*
-Values: "pylint" or "pyflakes"
-Default: "pylint".
+Values: "pylint", "pyflakes", "pep8", "mccabe"
+        You can set many checkers. E.g. "pyflakes,pep8,mccabe" ~
 
-This option set code checker.
+Default: "pyflakes,pep8,mccabe".
+
+This option set code checkers.
+
+------------------------------------------------------------------------------
+                                                          *'pymode_lint_ignore'*
+Values: IDs of errors, separated by commas or empty string
+        E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc ~
+
+Default: "E501".
+
+Skip errors and warnings.
+See also: |'pymode_lint_select'|, |'pymode_lint_config'|
+
+------------------------------------------------------------------------------
+                                                         *'pymode_lint_select'*
+Values: IDs of errors, separated by commas or empty string
+        E.g. "W002,C" Force W002 and all C-ids ~
+
+Default: "".
+
+Select errors and warnings.
+See also: |'pymode_lint_ignore'|, |'pymode_lint_config'|
 
 ------------------------------------------------------------------------------
                                                            *'pymode_lint_onfly'*
@@ -163,6 +228,8 @@ Default: "$HOME/.pylintrc"
 
 If this option is set path to pylint configuration. If configuration not found
 uses file 'pylintrc' from python-mode sources.
+
+See also: |'pymode_lint_ignore'|, |'pymode_lint_select'|
 
 ------------------------------------------------------------------------------
                                                            *'pymode_lint_write'*
@@ -200,11 +267,26 @@ Default: 0.
 If this option is set to 0 then pylint not jump on first error.
 
 ------------------------------------------------------------------------------
+                                                            *'pymode_lint_hold'*
+Values: 0 or 1.
+Default: 0.
+
+If this option is set to 0 then pylint switch on quickfix window when it open
+Not working when |'pymode_lint_jump'| enabled.
+
+------------------------------------------------------------------------------
                                                        *'pymode_lint_minheight'*
 Values: int
 Default: 3.
 
 Set minimal height for pylint cwindow
+
+------------------------------------------------------------------------------
+                                               *'pymode_lint_mccabe_complexity'*
+Values: int
+Default: 8.
+
+Set minimal complexity for mccabe linter.
 
 ------------------------------------------------------------------------------
                                                        *'pymode_lint_maxheight'*
@@ -281,16 +363,12 @@ If this option is set to 1, pymode enable next options for python buffers: >
     setlocal autoindent
 <
 ------------------------------------------------------------------------------
-                                                         *'pymode_options_fold'*
+                                                              *'pymode_folding'*
 Values: 0 or 1.
 Default: 1.
 
-If this option is set to 1, pymode enable next options for python buffers: >
+If this option is set to 1, pymode enable python-folding.
 
-    setlocal foldlevelstart=99
-    setlocal foldlevel=99
-    setlocal foldmethod=indent
-<
 ------------------------------------------------------------------------------
                                                         *'pymode_options_other'*
 Values: 0 or 1.
@@ -330,7 +408,7 @@ iM                Select inner function or method. Ex: viM, diM, yiM, ciM (norma
 3. Default Keys ~
                                                                 *PythonModeKeys*
 
-For redifine keys see: |PythonModeOptions|
+For redefine keys see: |PythonModeOptions|
 
 ================  ============================
 Key               Command
@@ -369,6 +447,9 @@ iM                Operation with inner function or method.
 
 *:PyLint*                                                                 *PyLint*
     Check current buffer
+
+*:PyLintAuto*                                                         *PyLintAuto*
+    Automatic fix PEP8 errors in current buffer
                                  
 *:Pyrun*                                                                   *Pyrun*
     Run current buffer
@@ -377,6 +458,12 @@ iM                Operation with inner function or method.
 ==============================================================================
 5. FAQ ~
                                                                  *PythonModeFAQ*
+
+Python-mode dont work
+---------------------
+
+Run ":call pymode#troubleshooting#Test()", fix warning or send me output.
+
 
 Rope completion is very slow
 ----------------------------
@@ -396,12 +483,12 @@ Solutions:
 Pylint check is very slow
 -------------------------
 
-In some projects pylint_ may check slowly, because it also scan imported modules if posible.
+In some projects pylint_ may check slowly, because it also scan imported modules if possible.
 Try use pyflakes, see |'pymode_lint_checker'|.
 
 You may set |exrc| and |secure| in your |vimrc| for auto set custom settings from `.vimrc` from your projects directories.
 >
-    Example: On Flask projects I automaticly set 'g:pymode_lint_checker = "pyflakes"', on django 'g:pymode_lint_cheker = "pylint"'
+    Example: On Flask projects I automatically set 'g:pymode_lint_checker = "pyflakes"', on Django 'g:pymode_lint_checker = "pylint"'
 <
 
 
@@ -424,6 +511,14 @@ You may set |exrc| and |secure| in your |vimrc| for auto set custom settings fro
         Copyright (c) 2005 Divmod, Inc.
         http://www.divmod.com/
 
+    PEP8:
+        Copyright (c) 2006 Johann C. Rocholl <johann@rocholl.net>
+        http://github.com/jcrocholl/pep8
+
+    autopep8:
+        Copyright (c) 2012 hhatto <hhatto.jp@gmail.com>
+        https://github.com/hhatto/autopep8
+
     Python syntax for vim:
         Copyright (c) 2010 Dmitry Vasiliev
         http://www.hlabs.spb.ru/vim/python.vim
@@ -439,6 +534,8 @@ See: http://www.gnu.org/copyleft/lesser.html
 If you like this plugin, you can send me postcard :) 
 My address is here: "Russia, 143401, Krasnogorsk, Shkolnaya 1-19" to "Kirill Klenov".
 Thanks for support!
+
+Version 0.6.5: I still haven't received any postcard, guys :(
 
 
 ------------------------------------------------------------------------------

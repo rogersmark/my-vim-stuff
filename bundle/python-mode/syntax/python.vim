@@ -1,10 +1,7 @@
 " vim: ft=vim:fdm=marker
 
-" OPTION: g:pymode_syntax -- bool.
-call pymode#Default('g:pymode_syntax', 1)
-
 " DESC: Disable script loading
-if pymode#Default('b:current_syntax', 'python') || !g:pymode_syntax
+if !pymode#Option('syntax') || pymode#Default('b:current_syntax', 'python')
     finish
 endif
 
@@ -33,7 +30,7 @@ call pymode#Default('g:pymode_syntax_all', 1)
     syn keyword pythonException	try except finally
     syn keyword pythonOperator	and in is not or
 
-    if !pymode#Default("g:pymode_syntax_print_as_function", 0) || g:pymode_syntax_print_as_function
+    if !pymode#Default("g:pymode_syntax_print_as_function", 0) || !g:pymode_syntax_print_as_function
         syn keyword pythonStatement print
     endif
 

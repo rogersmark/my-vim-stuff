@@ -95,8 +95,6 @@ if g:pad_use_default_mappings == 1
     call s:CreateMapping("<S-esc>", "OpenPad", "normal")
     call s:CreateMapping("<S-esc>", "OpenPad", "insert")
 	else " the previous mappings don't work in the terminal
-    call s:CreateMapping("<leader><esc>", "ListPads", "normal")
-    call s:CreateMapping("<leader><esc>", "ListPads", "insert")
     call s:CreateMapping("<leader>n", "OpenPad", "normal")
     call s:CreateMapping("<leader>n", "OpenPad", "insert")
 	endif
