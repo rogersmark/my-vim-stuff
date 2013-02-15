@@ -3,6 +3,7 @@
 'pymode_doc'	pymode.txt	/*'pymode_doc'*
 'pymode_doc_key'	pymode.txt	/*'pymode_doc_key'*
 'pymode_folding'	pymode.txt	/*'pymode_folding'*
+'pymode_indent'	pymode.txt	/*'pymode_indent'*
 'pymode_lint'	pymode.txt	/*'pymode_lint'*
 'pymode_lint_checker'	pymode.txt	/*'pymode_lint_checker'*
 'pymode_lint_config'	pymode.txt	/*'pymode_lint_config'*
@@ -19,8 +20,7 @@
 'pymode_lint_signs'	pymode.txt	/*'pymode_lint_signs'*
 'pymode_lint_write'	pymode.txt	/*'pymode_lint_write'*
 'pymode_motion'	pymode.txt	/*'pymode_motion'*
-'pymode_options_indent'	pymode.txt	/*'pymode_options_indent'*
-'pymode_options_other'	pymode.txt	/*'pymode_options_other'*
+'pymode_options'	pymode.txt	/*'pymode_options'*
 'pymode_paths'	pymode.txt	/*'pymode_paths'*
 'pymode_rope'	pymode.txt	/*'pymode_rope'*
 'pymode_rope_always_show_complete_menu'	ropevim.txt	/*'pymode_rope_always_show_complete_menu'*
@@ -38,7 +38,6 @@
 'pymode_run'	pymode.txt	/*'pymode_run'*
 'pymode_run_key'	pymode.txt	/*'pymode_run_key'*
 'pymode_syntax'	pymode.txt	/*'pymode_syntax'*
-'pymode_utils'	pymode.txt	/*'pymode_utils'*
 'pymode_utils_whitespaces'	pymode.txt	/*'pymode_utils_whitespaces'*
 'pymode_virtualenv'	pymode.txt	/*'pymode_virtualenv'*
 :PyLint	pymode.txt	/*:PyLint*
